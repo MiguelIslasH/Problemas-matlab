@@ -1,0 +1,76 @@
+system cls
+grid on;
+
+a1 = input('Introduce el primer coeficiente ');
+a2 = input('Introduce el segundo coeficiente ');
+a3 = input('Introduce el termino independiente ');
+
+a4 = input('Introduce el primer coeficiente ');
+a5 = input('Introduce el segundo coeficiente ');
+a6 = input('Introduce el termino independiente ');
+
+ x=-10:10;
+    if(a2>0)
+        y=(a3+-a1*x)/a2;
+        plot(x,y);
+        hold on
+        y2=(a6+-a4*x)/a5;
+        plot(x,y2);
+        
+        hold on
+    else
+        y=(-a3+a1*x)/-a2;
+        plot(x,y);
+        hold on
+        y2=(-a6+a4*x)/-a5;
+        plot(x,y2); 
+        hold on
+    end
+
+if(abs(a1)>abs(a4))
+   aux1 = a1;
+   aux2 = a2;
+   aux3 = a3;
+   
+   a1=a4;
+   a2=a5;
+   a3=a6;
+   
+   a4=aux1;
+   a5=aux2;
+   a6=aux3;
+end
+
+mayor=a4;
+menor=a1;
+
+multiplo = -(mayor/menor);
+
+a4 =multiplo*a1+a4;
+a5 = multiplo * a2 +a5;
+a6 = multiplo * a3 + a6;
+
+if (a5~=0)
+    ye=a6/a5;
+    xe=(a3-a2*ye)/a1;
+    fprintf('Unica solucion: \n');
+    fprintf('y= %.2f\n',ye);
+    fprintf('x= %.2f\n',xe);
+    
+    plot(xe,ye,'O');
+   title(['Gráfica x=',num2str(xe),'    y=',num2str(ye)]);
+      
+end
+
+if(a5==0 && a6~=0)
+    fprintf("No tiene solución\n");
+end
+
+if(a5==0 && a6==0)
+    fprintf("Tiene una infinidad de soluciones\n");
+    if(a1>0)
+        fprintf("x= (%.2f +%.2fy)/%.2f",a3,-a2,a1);
+    else
+        fprintf("x= (%.2f+%.2fy)/%.2f",-a3,a2,-a1);
+    end
+end
